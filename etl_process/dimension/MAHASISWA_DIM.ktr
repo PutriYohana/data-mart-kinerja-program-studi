@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>KUESIONER_DIM</name>
+    <name>MAHASISWA_DIM</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,20 +427,20 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2022/05/12 20:32:36.330</created_date>
+    <created_date>2022/05/16 11:43:17.247</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2022/05/12 20:32:36.330</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2022/05/16 11:43:17.247</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>survei</name>
+    <name>cis</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cis_datakuesioner</database>
+    <database>cis</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f294be0dbc798fc0ff8b</password>
@@ -488,11 +487,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>survei2</name>
+    <name>cis2</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cis_datakuesioner_dim</database>
+    <database>cis_dim</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7f294be0dbc798fc0ff8b</password>
@@ -556,14 +555,20 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>survei</connection>
+    <connection>cis</connection>
     <sql>SELECT
-  kuesioner_id
-, kuesioner_pertanyaan_id
-, pertanyaan
-, kuesioner_jawaban_peserta_id
-, jawaban
-FROM "public".stg_kuesioner
+  dim_id
+, nim
+, nama
+, user_name
+, tgl_lahir
+, tempat_lahir
+, jenis_kelamin
+, agama
+, alamat
+, email
+, telepon
+FROM "public".stg_mahasiswa
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -571,123 +576,7 @@ FROM "public".stg_kuesioner
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>kuesioner_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>kuesioner_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Bangkok</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>kuesioner_pertanyaan_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>kuesioner_pertanyaan_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Bangkok</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>pertanyaan</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>pertanyaan</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Bangkok</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>kuesioner_jawaban_peserta_id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>kuesioner_jawaban_peserta_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Bangkok</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>jawaban</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>jawaban</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Bangkok</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+    <row-meta/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -697,7 +586,7 @@ FROM "public".stg_kuesioner
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
+      <xloc>128</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -714,14 +603,14 @@ FROM "public".stg_kuesioner
       <schema_name/>
     </partitioning>
     <schema/>
-    <table>DIM_KUESIONER</table>
-    <connection>survei2</connection>
+    <table>DIM_MAHASISWA</table>
+    <connection>cis2</connection>
     <commit>100</commit>
     <update>Y</update>
     <fields>
       <key>
-        <name>kuesioner_id</name>
-        <lookup>kuesioner_id</lookup>
+        <name>dim_id</name>
+        <lookup>dim_id</lookup>
       </key>
       <date>
         <name/>
@@ -729,27 +618,57 @@ FROM "public".stg_kuesioner
         <to>date_to</to>
       </date>
       <field>
-        <name>kuesioner_pertanyaan_id</name>
-        <lookup>kuesioner_pertanyaan_id</lookup>
-        <update>Update</update>
+        <name>nim</name>
+        <lookup>nim</lookup>
+        <update>Insert</update>
       </field>
       <field>
-        <name>pertanyaan</name>
-        <lookup>pertanyaan</lookup>
-        <update>Update</update>
+        <name>nama</name>
+        <lookup>nama</lookup>
+        <update>Insert</update>
       </field>
       <field>
-        <name>kuesioner_jawaban_peserta_id</name>
-        <lookup>kuesioner_jawaban_peserta_id</lookup>
-        <update>Update</update>
+        <name>user_name</name>
+        <lookup>user_name</lookup>
+        <update>Insert</update>
       </field>
       <field>
-        <name>jawaban</name>
-        <lookup>jawaban</lookup>
-        <update>Update</update>
+        <name>tgl_lahir</name>
+        <lookup>tgl_lahir</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>tempat_lahir</name>
+        <lookup>tempat_lahir</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>jenis_kelamin</name>
+        <lookup>jenis_kelamin</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>agama</name>
+        <lookup>agama</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>alamat</name>
+        <lookup>alamat</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>email</name>
+        <lookup>email</lookup>
+        <update>Insert</update>
+      </field>
+      <field>
+        <name>telepon</name>
+        <lookup>telepon</lookup>
+        <update>Insert</update>
       </field>
       <return>
-        <name>PK_KUESIONER</name>
+        <name>PK_MAHASISWA</name>
         <rename/>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
@@ -774,7 +693,7 @@ FROM "public".stg_kuesioner
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>272</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
