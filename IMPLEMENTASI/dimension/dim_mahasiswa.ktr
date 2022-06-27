@@ -440,10 +440,10 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cis_staging</database>
+    <database>staging</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ff228dc6fa8c</password>
+    <password>Encrypted 2be98afc86aa7f2e4ac10a166df9ca1d3</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -491,10 +491,10 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>cis_dimension</database>
+    <database>data_warehouse</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ff228dc6fa8c</password>
+    <password>Encrypted 2be98afc86aa7f2e4ac10a166df9ca1d3</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -556,7 +556,7 @@
       <schema_name/>
     </partitioning>
     <schema/>
-    <table>scd_mahasiswa</table>
+    <table>dim_mahasiswa</table>
     <connection>cis2</connection>
     <commit>100</commit>
     <update>Y</update>
@@ -571,13 +571,13 @@
         <to>date_to</to>
       </date>
       <field>
-        <name>nama</name>
-        <lookup>nama</lookup>
+        <name>user_name</name>
+        <lookup>user_name</lookup>
         <update>Insert</update>
       </field>
       <field>
-        <name>user_name</name>
-        <lookup>user_name</lookup>
+        <name>nama</name>
+        <lookup>nama</lookup>
         <update>Insert</update>
       </field>
       <field>
@@ -618,8 +618,8 @@
       <return>
         <name>mahasiswa_key</name>
         <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
+        <creation_method>autoinc</creation_method>
+        <use_autoinc>Y</use_autoinc>
         <version>version</version>
       </return>
     </fields>
@@ -659,9 +659,9 @@
     </partitioning>
     <connection>cis1</connection>
     <sql>SELECT
-  nama
-, nim
+  nim
 , user_name
+, nama
 , tgl_lahir
 , tempat_lahir
 , jenis_kelamin
@@ -681,31 +681,8 @@ FROM "public".stg_mahasiswa
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>nama</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input - dim_mahasiswa</origin>
-        <comments>nama</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Asia/Bangkok</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
         <name>nim</name>
-        <length>2147483647</length>
+        <length>50</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>nim</comments>
@@ -728,10 +705,33 @@ FROM "public".stg_mahasiswa
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>user_name</name>
-        <length>2147483647</length>
+        <length>10</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>user_name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Asia/Bangkok</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nama</name>
+        <length>50</length>
+        <precision>-1</precision>
+        <origin>Table input - dim_mahasiswa</origin>
+        <comments>nama</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -774,7 +774,7 @@ FROM "public".stg_mahasiswa
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>tempat_lahir</name>
-        <length>2147483647</length>
+        <length>50</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>tempat_lahir</comments>
@@ -797,7 +797,7 @@ FROM "public".stg_mahasiswa
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>jenis_kelamin</name>
-        <length>1</length>
+        <length>9</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>jenis_kelamin</comments>
@@ -820,7 +820,7 @@ FROM "public".stg_mahasiswa
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>agama</name>
-        <length>2147483647</length>
+        <length>30</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>agama</comments>
@@ -866,7 +866,7 @@ FROM "public".stg_mahasiswa
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>email</name>
-        <length>2147483647</length>
+        <length>50</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>email</comments>
@@ -889,7 +889,7 @@ FROM "public".stg_mahasiswa
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>telepon</name>
-        <length>2147483647</length>
+        <length>50</length>
         <precision>-1</precision>
         <origin>Table input - dim_mahasiswa</origin>
         <comments>telepon</comments>
